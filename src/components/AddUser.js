@@ -1,6 +1,8 @@
-import { React, useState } from "react";
+import{ React, useState } from "react";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
-export default function AddUser() {
+const AddUser = (props) => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -39,22 +41,20 @@ export default function AddUser() {
       glIntSale: roles.glIntSale,
       glEng: roles.glEng,
     };
-    tempRole[e.target.value]=!(roles[e.target.value]);
+    tempRole[e.target.value] = !roles[e.target.value];
     setRole(tempRole);
     // switch (e) {
     //   case "a":
     //     tempRole.glAdmin = true;
     //     break;
     // }
-
   };
 
   const handleSubmit = (e) => {
-    let tempRoles=[];
-    Object.keys(roles).forEach((key)=>{
-      if(roles[key])
-        tempRoles.push(key);
-    })
+    let tempRoles = [];
+    Object.keys(roles).forEach((key) => {
+      if (roles[key]) tempRoles.push(key);
+    });
     let oData = {
       customer: "Gleason",
       username: userName,
@@ -111,9 +111,9 @@ export default function AddUser() {
               <input
                 type="email"
                 className="form-control"
+                id="email"
                 value={email}
                 onChange={handleEmailChange}
-                id="email"
                 placeholder="Enter Email address"
               />
             </div>
@@ -124,9 +124,9 @@ export default function AddUser() {
               <input
                 type="text"
                 className="form-control"
+                id="firstname"
                 value={firstName}
                 onChange={handleFirstChange}
-                id="firstname"
                 placeholder="Enter First Name"
               />
             </div>
@@ -137,9 +137,9 @@ export default function AddUser() {
               <input
                 type="text"
                 className="form-control"
+                id="lastname"
                 value={lastName}
                 onChange={handleLastChange}
-                id="lastname"
                 placeholder="Enter Last Name"
               />
             </div>
@@ -150,7 +150,7 @@ export default function AddUser() {
                 value=""
                 id="flexCheckDefault"
               />
-              <label className="form-check-label" htmlFor="flexCheckDefault">
+              <label className="form-check-label" for="flexCheckDefault">
                 Trial User
               </label>
             </div>
@@ -163,9 +163,9 @@ export default function AddUser() {
               <input
                 type="text"
                 className="form-control"
+                id="username"
                 value={userName}
                 onChange={handleUsernameChange}
-                id="username"
                 placeholder="Enter Username"
               />
             </div>
@@ -242,13 +242,13 @@ export default function AddUser() {
             </div>
           </div>
         </div>
-        <div className="button-section">
-          <button type="button" className="btn btn-danger">
+        <div className="btn-group button-section" id="reset">
+        <button type="button" className="btn btn-outline-danger" >
             Reset
           </button>
           <button
             type="button"
-            className="btn btn-success"
+            className="btn btn-outline-primary"
             onClick={handleSubmit}
           >
             Add
@@ -257,4 +257,6 @@ export default function AddUser() {
       </form>
     </div>
   );
-}
+};
+
+export default AddUser;
