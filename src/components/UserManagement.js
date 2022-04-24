@@ -13,6 +13,7 @@ const UserManagement = () => {
   const [userDetails, setUserDetails] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   let deleteComponent = deleteStatus?<DeleteUser/>:null;
+
   const fetchApi = () => {
     let dataFetch = fetch("http://localhost:3000/viewUsers")
       .then((response) => response.json())
@@ -64,7 +65,6 @@ const UserManagement = () => {
 
   let showDelete = (user) => {
     console.log('userDetails in getComponents', user);
-    setDeleteStatus(!deleteStatus);
     fetch("http://localhost:3000/deleteUser/" + user.id, {
       headers: {
         Accept: "*/*",
@@ -74,11 +74,12 @@ const UserManagement = () => {
     })
       .then(function (res) {
         console.log(res);
+        setDeleteStatus(!deleteStatus);
+        fetchApi();
       })
       .catch(function (res) {
         console.log(res);
       });
-    
   }
   var listElement = data.userData
     ? data.userData.map((user) => {
